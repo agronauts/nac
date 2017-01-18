@@ -16,6 +16,10 @@ class Tile:
     def is_empty(self):
         return self._typ == '-'
 
+    def __eq__(self, other):
+        return self._typ == other._typ
+
+
 class Board:
     _board = [[Tile('-') for _ in range(3)] for _ in range(3)]
 

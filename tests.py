@@ -38,7 +38,7 @@ class PlayerTest(unittest.TestCase):
     def test_player_piece(self):
         player = Player('x')
 
-        self.assertEquals(player.piece, Tile('x'))
+        self.assertEqual(player.piece, Tile('x'))
 
     def test_player_makes_move(self):
         player = Player('x')
