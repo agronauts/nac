@@ -1,4 +1,4 @@
-class Tile(object):
+class Tile:
     accepted_tokens = ['x', 'o', '-']
 
     def __init__(self, typ):
@@ -17,7 +17,7 @@ class Tile(object):
         return self._typ == '-'
 
 class Board:
-    _board = [['-' for _ in range(3)] for _ in range(3)]
+    _board = [[Tile('-') for _ in range(3)] for _ in range(3)]
 
     def __setitem__(self, index, item):
         tile = Tile(item)

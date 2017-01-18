@@ -1,5 +1,6 @@
 import unittest
 from board import Board, Tile
+from players import Player
 
 class BoardTest(unittest.TestCase):
 
@@ -31,6 +32,21 @@ class TileTest(unittest.TestCase):
         with self.assertRaises(Exception) as context:
             Tile('invalid')
         self.assertTrue('Not a Tile type', str(context.exception))
+
+class PlayerTest(unittest.TestCase):
+
+    def test_player_piece(self):
+        player = Player('x')
+
+        self.assertEquals(player.piece, Tile('x'))
+
+    def test_player_makes_move(self):
+        player = Player('x')
+        board = Board()
+
+        player.place_piece(board, (0,0))
+
+        self.assertFalse(board[0][0].is_empty())
 
 def main():
     unittest.main()
