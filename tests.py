@@ -1,5 +1,5 @@
 import unittest
-from board import Board
+from board import Board, Tile
 
 class BoardTest(unittest.TestCase):
 
@@ -10,6 +10,12 @@ class BoardTest(unittest.TestCase):
 
         self.assertEqual(board[0][0], 'X')
 
+class TileTest(unittest.TestCase):
+
+    def test_is_cross(self):
+        tile = Tile('x')
+
+        self.assertTrue(tile.is_cross())
 
 def main():
     unittest.main()
