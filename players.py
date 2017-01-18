@@ -23,3 +23,6 @@ class Mediator:
             raise Exception('Tile is not empty')
         self.board[x][y] = piece
 
+    def __repr__(self):
+        return 'Mediator(%s)' % repr(self.board)
+

@@ -1,9 +1,9 @@
 ============================= test session starts =============================
 platform win32 -- Python 3.5.2, pytest-3.0.5, py-1.4.32, pluggy-0.4.0
 rootdir: C:\Users\PatrickN\py, inifile: 
-collected 9 items
+collected 10 items
 
-test_game.py .......FF
+test_game.py ........FF
 
 ================================== FAILURES ===================================
 ___________________ MediatorTest.test_place_non_empty_tile ____________________
@@ -15,11 +15,10 @@ self = <test_game.MediatorTest testMethod=test_place_non_empty_tile>
         print(self.med.board)
 >       self.med.place_piece(tile, (0,0))
 
-test_game.py:68: 
+test_game.py:71: 
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
 
-self = <players.Mediator object at 0x000002E3946822E8>
-piece = <board.Tile object at 0x000002E394682320>, coord = (0, 0)
+self = Mediator(Board()), piece = Tile(''x''), coord = (0, 0)
 
     def place_piece(self, piece, coord):
         x, y = coord
@@ -43,11 +42,10 @@ self = <test_game.MediatorTest testMethod=test_place_tile>
     
 >       self.med.place_piece(tile, (0,0))
 
-test_game.py:61: 
+test_game.py:64: 
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
 
-self = <players.Mediator object at 0x000002E3946B25F8>
-piece = <board.Tile object at 0x000002E3946B2630>, coord = (0, 0)
+self = Mediator(Board()), piece = Tile(''x''), coord = (0, 0)
 
     def place_piece(self, piece, coord):
         x, y = coord
@@ -56,4 +54,4 @@ piece = <board.Tile object at 0x000002E3946B2630>, coord = (0, 0)
 E           Exception: Tile is not empty
 
 players.py:23: Exception
-===================== 2 failed, 7 passed in 0.09 seconds ======================
+===================== 2 failed, 8 passed in 0.10 seconds ======================

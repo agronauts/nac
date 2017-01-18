@@ -21,6 +21,9 @@ class Tile:
     def __str__(self):
         return self._typ
 
+    def __repr__(self):
+        return "Tile(%s)" % repr(self._typ)
+
 
 class Board:
     _board = [[Tile('-') for _ in range(3)] for _ in range(3)]
@@ -37,6 +40,9 @@ class Board:
         for row in range(3):
             rows.append('|'.join(str(self._board[col][row]) for col in range(3)))
         return '\n-+-+-\n'.join(rows)
+
+    def __repr__(self):
+        return 'Board()'
 
 
 

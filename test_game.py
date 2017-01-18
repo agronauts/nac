@@ -34,6 +34,9 @@ class TileTest(unittest.TestCase):
             Tile('invalid')
         self.assertEqual('Not a Tile type', str(context.exception))
 
+    def test_board_initialise(self):
+        pass
+
 class PlayerTest(unittest.TestCase):
 
     def test_player_piece(self):
