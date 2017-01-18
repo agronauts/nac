@@ -12,3 +12,12 @@ class Player:
         x, y = coord
         board[x][y] = copy.copy(self.piece)
 
+class Mediator:
+
+    def __init__(self, board):
+        self.board = board
+
+    def place_piece(self, piece, coord):
+        x, y = coord
+        self.board[x][y] = piece
+

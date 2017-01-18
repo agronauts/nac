@@ -1,6 +1,6 @@
 import unittest
-from board import Board, Tile
-from players import Player
+from board import Board, Tile 
+from players import Player, Mediator
 
 class BoardTest(unittest.TestCase):
 
@@ -31,7 +31,7 @@ class TileTest(unittest.TestCase):
     def test_invalid_tile(self):
         with self.assertRaises(Exception) as context:
             Tile('invalid')
-        self.assertTrue('Not a Tile type', str(context.exception))
+        self.assertEqual('Not a Tile type', str(context.exception))
 
 class PlayerTest(unittest.TestCase):
 
@@ -47,6 +47,29 @@ class PlayerTest(unittest.TestCase):
         player.place_piece(board, (0,0))
 
         self.assertFalse(board[0][0].is_empty())
+
+class MediatorTest(unittest.TestCase):
+
+    def setUp(self):
+        board = Board()
+        self.med = Mediator(board)
+
+    def test_place_tile(self):
+        tile = Tile('x')
+
+        self.med.place_piece(tile, (0,0))
+
+        self.assertTrue(self.med.board[0][0], tile)
+
+    def test_place_non_empty_tile(self):
+        tile = Tile('x')
+        self.med.place_piece(tile, (0,0))
+
+        with self.assertRaises(Exception) as context:
+            self.med.place_piece(tile, (0, 0))
+
+        self.assertEqual('Tile already occupied' , str(context.exception))
+
 
 def main():
     unittest.main()
