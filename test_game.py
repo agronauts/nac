@@ -14,7 +14,7 @@ class BoardTest(unittest.TestCase):
 
         self.board[0][0] = 'X'
 
-        self.assertEqual(self.board[0][0], 'X')
+        assert self.board[0][0] == 'X'
 
 class TileTest(unittest.TestCase):
 
@@ -25,22 +25,21 @@ class TileTest(unittest.TestCase):
     def test_is_nought(self):
         tile = Tile('o')
 
-        self.assertTrue(tile.is_nought())
+        assert tile.is_nought()
 
     def test_is_cross(self):
         tile = Tile('x')
 
-        self.assertTrue(tile.is_cross())
+        assert tile.is_cross()
 
     def test_is_empty(self):
         tile = Tile('-')
 
-        self.assertTrue(tile.is_empty())
+        assert tile.is_empty()
 
     def test_invalid_tile(self):
-        with self.assertRaises(Exception) as context:
+        with pytest.raises(Exception):
             Tile('invalid')
-        self.assertEqual('Not a Tile type', str(context.exception))
 
     def test_board_initialise(self):
         pass
@@ -54,7 +53,7 @@ class PlayerTest(unittest.TestCase):
     def test_player_piece(self):
         player = Player('x')
 
-        self.assertEqual(player.piece, Tile('x'))
+        assert str(player.piece) == 'x'
 
     def test_player_makes_move(self):
         player = Player('x')
@@ -62,9 +61,9 @@ class PlayerTest(unittest.TestCase):
 
         player.place_piece(self.board, (0,0))
 
-        self.assertFalse(self.board[0][0].is_empty())
+        assert not self.board[0][0].is_empty()
 
-class MediatorTest(unittest.TestCase):
+class MediatorTest:
 
     def setup_method(self, method):
         self.board = Board()
@@ -75,7 +74,7 @@ class MediatorTest(unittest.TestCase):
 
         self.med.place_piece(tile, (0,0))
 
-        self.assertTrue(self.med.board[0][0], tile)
+        assert self.med.board[0][0] == tile
 
     def test_place_non_empty_tile(self):
         tile = Tile('x')
