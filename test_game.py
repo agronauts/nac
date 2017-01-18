@@ -3,16 +3,24 @@ import pytest
 from board import Board, Tile 
 from players import Player, Mediator
 
+
 class BoardTest(unittest.TestCase):
 
+    def setup_method(self, method):
+        self.board = Board()
+        self.med = Mediator(self.board)
+
     def test_put_cross_on_board(self):
-        board = Board()
 
-        board[0][0] = 'X'
+        self.board[0][0] = 'X'
 
-        self.assertEqual(board[0][0], 'X')
+        self.assertEqual(self.board[0][0], 'X')
 
 class TileTest(unittest.TestCase):
+
+    def setup_method(self, method):
+        self.board = Board()
+        self.med = Mediator(self.board)
 
     def test_is_nought(self):
         tile = Tile('o')
@@ -39,6 +47,10 @@ class TileTest(unittest.TestCase):
 
 class PlayerTest(unittest.TestCase):
 
+    def setup_method(self, method):
+        self.board = Board()
+        self.med = Mediator(self.board)
+
     def test_player_piece(self):
         player = Player('x')
 
@@ -46,19 +58,19 @@ class PlayerTest(unittest.TestCase):
 
     def test_player_makes_move(self):
         player = Player('x')
-        board = Board()
+        self.board = Board()
 
-        player.place_piece(board, (0,0))
+        player.place_piece(self.board, (0,0))
 
-        self.assertFalse(board[0][0].is_empty())
+        self.assertFalse(self.board[0][0].is_empty())
 
 class MediatorTest(unittest.TestCase):
 
-    def setUp(self):
-        board = Board()
-        self.med = Mediator(board)
+    def setup_method(self, method):
+        self.board = Board()
+        self.med = Mediator(self.board)
 
-    def test_place_tile(self):
+    def test_place_on_empty_tile(self):
         tile = Tile('x')
 
         self.med.place_piece(tile, (0,0))

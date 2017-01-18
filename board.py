@@ -26,7 +26,9 @@ class Tile:
 
 
 class Board:
-    _board = [[Tile('-') for _ in range(3)] for _ in range(3)]
+
+    def __init__(self):
+        self._board = [[Tile('-') for _ in range(3)] for _ in range(3)]
 
     def __setitem__(self, index, item):
         tile = Tile(item)

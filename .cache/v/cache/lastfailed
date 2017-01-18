@@ -1,4 +1,1 @@
-{
-  "test_game.py::MediatorTest::test_place_non_empty_tile": true,
-  "test_game.py::MediatorTest::test_place_tile": true
-}
+{}

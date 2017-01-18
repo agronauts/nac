@@ -3,55 +3,6 @@ platform win32 -- Python 3.5.2, pytest-3.0.5, py-1.4.32, pluggy-0.4.0
 rootdir: C:\Users\PatrickN\py, inifile: 
 collected 10 items
 
-test_game.py ........FF
+test_game.py ..........
 
-================================== FAILURES ===================================
-___________________ MediatorTest.test_place_non_empty_tile ____________________
-
-self = <test_game.MediatorTest testMethod=test_place_non_empty_tile>
-
-    def test_place_non_empty_tile(self):
-        tile = Tile('x')
-        print(self.med.board)
->       self.med.place_piece(tile, (0,0))
-
-test_game.py:71: 
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
-
-self = Mediator(Board()), piece = Tile(''x''), coord = (0, 0)
-
-    def place_piece(self, piece, coord):
-        x, y = coord
-        if not self.board[x][y].is_empty():
->           raise Exception('Tile is not empty')
-E           Exception: Tile is not empty
-
-players.py:23: Exception
----------------------------- Captured stdout call -----------------------------
-x|-|-
--+-+-
--|-|-
--+-+-
--|-|-
-________________________ MediatorTest.test_place_tile _________________________
-
-self = <test_game.MediatorTest testMethod=test_place_tile>
-
-    def test_place_tile(self):
-        tile = Tile('x')
-    
->       self.med.place_piece(tile, (0,0))
-
-test_game.py:64: 
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
-
-self = Mediator(Board()), piece = Tile(''x''), coord = (0, 0)
-
-    def place_piece(self, piece, coord):
-        x, y = coord
-        if not self.board[x][y].is_empty():
->           raise Exception('Tile is not empty')
-E           Exception: Tile is not empty
-
-players.py:23: Exception
-===================== 2 failed, 8 passed in 0.10 seconds ======================
+========================== 10 passed in 0.05 seconds ==========================
