@@ -1,4 +1,5 @@
 import unittest
+import pytest
 from board import Board, Tile 
 from players import Player, Mediator
 
@@ -63,12 +64,11 @@ class MediatorTest(unittest.TestCase):
 
     def test_place_non_empty_tile(self):
         tile = Tile('x')
+        print(self.med.board)
         self.med.place_piece(tile, (0,0))
 
-        with self.assertRaises(Exception) as context:
+        with pytest.raises(Exception):
             self.med.place_piece(tile, (0, 0))
-
-        self.assertEqual('Tile already occupied' , str(context.exception))
 
 
 def main():

@@ -19,5 +19,7 @@ class Mediator:
 
     def place_piece(self, piece, coord):
         x, y = coord
+        if not self.board[x][y].is_empty():
+            raise Exception('Tile is not empty')
         self.board[x][y] = piece
 
