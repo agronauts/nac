@@ -68,9 +68,13 @@ class TestPlayer:
 
     def test_player_makes_move(self):
         # TODO learn mocking for Mediator
-        pytest.skip()
+        class MockMediator:
+            def __init__(self):
+                pass
+            def place_piece(*_):
+                pass
         player = Player('x')
-        self.board = Board()
+        player._med = MockMediator()
 
         player.place_piece((0,0))
 

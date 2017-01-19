@@ -3,6 +3,6 @@ platform win32 -- Python 3.5.2, pytest-3.0.5, py-1.4.32, pluggy-0.4.0
 rootdir: C:\Users\PatrickN\py, inifile: 
 collected 18 items
 
-nac\tests\test_game.py .......s..........
+nac\tests\test_game.py ..................
 
-==================== 17 passed, 1 skipped in 0.06 seconds =====================
+========================== 18 passed in 0.07 seconds ==========================

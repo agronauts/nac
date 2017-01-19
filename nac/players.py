@@ -13,7 +13,7 @@ class Player:
         self._med = None
 
     def place_piece(self, coord):
-        assert self._med != None, 'Need to register with a Mediator()'
+        assert self._med != None, 'Need to register with a Mediator'
         x, y = coord
         self._med.place_piece(self.piece, (x, y))
 
