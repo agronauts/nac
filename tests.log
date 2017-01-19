@@ -1,8 +1,8 @@
 ============================= test session starts =============================
 platform win32 -- Python 3.5.2, pytest-3.0.5, py-1.4.32, pluggy-0.4.0
 rootdir: C:\Users\PatrickN\py, inifile: 
-collected 8 items
+collected 15 items
 
-test_game.py ........
+test_game.py ...............
 
-========================== 8 passed in 0.05 seconds ===========================
+========================== 15 passed in 0.06 seconds ==========================

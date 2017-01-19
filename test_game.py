@@ -1,10 +1,9 @@
-import unittest
 import pytest
 from board import Board, Tile 
 from players import Player, Mediator
 
 
-class BoardTest(unittest.TestCase):
+class TestBoard:
 
     def setup_method(self, method):
         self.board = Board()
@@ -16,7 +15,7 @@ class BoardTest(unittest.TestCase):
 
         assert self.board[0][0] == 'X'
 
-class TileTest(unittest.TestCase):
+class TestTile:
 
     def setup_method(self, method):
         self.board = Board()
@@ -42,9 +41,11 @@ class TileTest(unittest.TestCase):
             Tile('invalid')
 
     def test_board_initialise(self):
-        pass
+        for row in self.board:
+            for tile in row:
+                assert tile.is_empty()
 
-class PlayerTest(unittest.TestCase):
+class TestPlayer:
 
     def setup_method(self, method):
         self.board = Board()
@@ -63,7 +64,7 @@ class PlayerTest(unittest.TestCase):
 
         assert not self.board[0][0].is_empty()
 
-class MediatorTest:
+class TestMediator:
 
     def setup_method(self, method):
         self.board = Board()
@@ -78,16 +79,39 @@ class MediatorTest:
 
     def test_place_non_empty_tile(self):
         tile = Tile('x')
-        print(self.med.board)
         self.med.place_piece(tile, (0,0))
 
         with pytest.raises(Exception):
             self.med.place_piece(tile, (0, 0))
 
+    def test_check_invalid_game(self):
+        for col in range(3):
+            self.board[0][col] = Tile('x')
 
-def main():
-    unittest.main()
+        assert self.med.game_status() == 'invalid state'
 
-if __name__ == '__main__':
-    main()
+    def test_check_new_game(self):
+        assert self.med.game_status() == 'x turn'
+
+    def test_check_noughts_turn(self):
+        self.board[0][0] = Tile('x')
+
+        assert self.med.game_status() == 'o turn'
+
+    def test_check_cross_won(self):
+        for col in range(3):
+            self.board[0][col] = Tile('x')
+        self.board[1][0] = Tile('o')
+        self.board[1][1] = Tile('o')
+
+        assert self.med.game_status() == 'x won'
+
+    def test_check_nought_won(self):
+        for col in range(3):
+            self.board[0][col] = Tile('o')
+        self.board[1][0] = Tile('x')
+        self.board[1][1] = Tile('x')
+        self.board[2][0] = Tile('x')
+
+        assert self.med.game_status() == 'o won'
 

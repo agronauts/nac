@@ -29,6 +29,10 @@ class Board:
 
     def __init__(self):
         self._board = [[Tile('-') for _ in range(3)] for _ in range(3)]
+        self.rows = [row for row in self._board]
+        self.cols = [[row[col] for col in range(3)] for row in self.rows]
+        self.diags =[[self._board[row][col] for row, col in zip(range(3), range(3))],\
+                     [self._board[row][col] for row, col in zip(range(3), range(2, -1, -1))]]
 
     def __setitem__(self, index, item):
         tile = Tile(item)
