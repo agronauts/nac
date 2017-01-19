@@ -1,4 +1,4 @@
-from board import Tile
+from .board import Tile
 from collections import Counter
 
 import copy 
@@ -55,6 +55,7 @@ class Mediator:
 
 class Game:
 
+    #TODO Run pyflakes or something
     def __init__(self, mediator, player1, player2):
         self.med = mediator
         self.p1 = player1

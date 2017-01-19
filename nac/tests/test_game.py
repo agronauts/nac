@@ -1,6 +1,7 @@
 import pytest
-from board import Board, Tile
-from players import Player, Mediator, Game
+
+from ..board import Board, Tile
+from ..players import Player, Mediator, Game
 
 
 class TestBoard:
