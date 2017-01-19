@@ -66,17 +66,16 @@ class TestPlayer:
 
         assert str(player.piece) == 'x'
 
-    def test_player_makes_move(self):
-        # TODO learn mocking for Mediator
-        class MockMediator:
-            def __init__(self):
-                pass
-            def place_piece(*_):
-                pass
-        player = Player('x')
-        player._med = MockMediator()
+def test_player_makes_move(monkeypatch):
+    class MockMediator:
+        def __init__(self):
+            pass
+        def place_piece(*_):
+            pass
+    player = Player('x')
+    monkeypatch.setattr(player, '_med', MockMediator())
 
-        player.place_piece((0,0))
+    player.place_piece((0,0))
 
 
 class TestMediator:
