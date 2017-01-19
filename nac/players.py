@@ -4,6 +4,7 @@ from collections import Counter
 import copy 
 import itertools as it
 import random
+import abc
 
 class Player:
     accepted_tokens = ['x', 'o', '-']
@@ -17,8 +18,9 @@ class Player:
         x, y = coord
         self._med.place_piece(self.piece, (x, y))
     
+    @abc.abstractmethod
     def make_move(self):
-        pass
+        return
 
 
 class AIPlayer(Player):
