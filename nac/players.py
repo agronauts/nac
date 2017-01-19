@@ -3,21 +3,29 @@ from collections import Counter
 
 import copy 
 import itertools as it
+import random
 
 class Player:
     accepted_tokens = ['x', 'o', '-']
 
     def __init__(self, typ):
         self.piece = Tile(typ)
+        self._med = None
 
-    def place_piece(self, board, coord):
+    def place_piece(self, coord):
+        assert self._med != None, 'Need to register with a Mediator()'
         x, y = coord
-        board[x][y] = copy.copy(self.piece)
+        self._med.place_piece(self.piece, (x, y))
+
 
 class Mediator:
 
-    def __init__(self, board):
+    def __init__(self, board, player1, player2):
         self.board = board
+        self.p1 = player1
+        self.p2 = player2
+        self.p1._med = self
+        self.p2._med = self
 
     def place_piece(self, piece, coord):
         x, y = coord
@@ -41,9 +49,7 @@ class Mediator:
             return 'o turn'
 
     def _check_winner(self):
-        # TODO Things
         for line in it.chain(self.board.rows, self.board.cols, self.board.diags):
-            print('line', line)
             if all(tile.is_cross() for tile in line):
                 return 'x'
             elif all(tile.is_nought() for tile in line):
@@ -53,10 +59,3 @@ class Mediator:
     def __repr__(self):
         return 'Mediator(%s)' % repr(self.board)
 
-class Game:
-
-    #TODO Run pyflakes or something
-    def __init__(self, mediator, player1, player2):
-        self.med = mediator
-        self.p1 = player1
-        self.p2 = player2
