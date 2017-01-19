@@ -1,4 +1,4 @@
-from .board import Tile
+from .board import Tile, TileNotEmptyError
 from collections import Counter
 
 import copy 
@@ -30,7 +30,7 @@ class Mediator:
     def place_piece(self, piece, coord):
         x, y = coord
         if not self.board[x][y].is_empty():
-            raise Exception('Tile is not empty')
+            raise TileNotEmptyError()
         self.board[x][y] = piece
 
     def game_status(self):

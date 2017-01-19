@@ -1,7 +1,8 @@
+
 import pytest
 import contextlib
 
-from ..board import Board, Tile
+from ..board import Board, Tile, TileNotEmptyError
 from ..players import Player, Mediator
 
 
@@ -45,7 +46,7 @@ class TestTile:
         assert tile.is_empty()
 
     def test_invalid_tile(self):
-        with pytest.raises(Exception):
+        with pytest.raises(TileNotEmptyError):
             Tile('invalid')
 
     def test_board_initialise(self):
@@ -97,7 +98,7 @@ class TestMediator:
         tile = Tile('x')
         self.med.place_piece(tile, (0,0))
 
-        with pytest.raises(Exception):
+        with pytest.raises(TileNotEmptyError):
             self.med.place_piece(tile, (0, 0))
 
     def test_check_invalid_game(self):
@@ -153,12 +154,12 @@ class TestInterface:
 
     def test_play_valid_game_with_one_invalid_move(self):
         with valid_game(self.med, self.p1, self.p2):
-            with pytest.raises(Exception):
+            with pytest.raises(TileNotEmptyError):
                 self.p2.place_piece((0,0))
 
     def test_play_valid_game_with_many_invalid_moves(self):
         with valid_game(self.med, self.p1, self.p2):
-            with pytest.raises(Exception):
+            with pytest.raises(TileNotEmptyError):
                 self.p2.place_piece((0,0))
                 assert self.med.game_status() == 'o turn'
                 self.p2.place_piece((0,0))

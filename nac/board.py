@@ -3,7 +3,7 @@ class Tile:
 
     def __init__(self, token):
         if token not in self.accepted_tokens:
-            raise Exception('Not a Tile type')
+            raise TileNotEmptyError('Not a Tile type')
         self._typ = token
 
     def is_cross(self):
@@ -50,6 +50,12 @@ class Board:
     def __repr__(self):
         return 'Board()'
 
+
+class Error(Exception):
+    pass
+
+class TileNotEmptyError(Error):
+    pass
 
 
 
