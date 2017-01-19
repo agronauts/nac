@@ -1,6 +1,6 @@
 import pytest
-from board import Board, Tile 
-from players import Player, Mediator
+from board import Board, Tile
+from players import Player, Mediator, Game
 
 
 class TestBoard:
@@ -115,3 +115,12 @@ class TestMediator:
 
         assert self.med.game_status() == 'o won'
 
+class TestGame:
+    def setup_method(self, method):
+        self.board = Board()
+        self.med = Mediator(self.board)
+        self.player1 = Player('x')
+        self.player2 = Player('o')
+
+    def test_start_game(self):
+        Game(self.med, self.player1, self.player2)

@@ -53,3 +53,9 @@ class Mediator:
     def __repr__(self):
         return 'Mediator(%s)' % repr(self.board)
 
+class Game:
+
+    def __init__(self, mediator, player1, player2):
+        self.med = mediator
+        self.p1 = player1
+        self.p2 = player2
