@@ -16,6 +16,15 @@ class Player:
         assert self._med != None, 'Need to register with a Mediator'
         x, y = coord
         self._med.place_piece(self.piece, (x, y))
+    
+    def make_move(self):
+        pass
+
+
+class AIPlayer(Player):
+
+    def make_move(self):
+        self.place_piece((random.randint(0,2), random.randint(0,2)))
 
 
 class Mediator:

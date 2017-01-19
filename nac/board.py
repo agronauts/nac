@@ -16,6 +16,8 @@ class Tile:
         return self._typ == '-'
 
     def __eq__(self, other):
+        if isinstance(other, str):
+            return self._typ == other
         return self._typ == other._typ
 
     def __str__(self):
