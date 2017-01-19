@@ -1,7 +1,10 @@
 import pytest
+import contextlib
 
 from ..board import Board, Tile
 from ..players import Player, Mediator
+
+
 
 
 class TestBoard:
@@ -146,37 +149,30 @@ class TestInterface:
         assert self.med.game_status() == 'x won'
 
     def test_play_valid_game_with_one_invalid_move(self):
-        assert self.med.game_status() == 'x turn'
-        self.p1.place_piece((0,0))
-        assert self.med.game_status() == 'o turn'
-        with pytest.raises(Exception):
-            self.p2.place_piece((0,0))
-        assert self.med.game_status() == 'o turn'
-        self.p2.place_piece((1,0))
-        assert self.med.game_status() == 'x turn'
-        self.p1.place_piece((0,1))
-        assert self.med.game_status() == 'o turn'
-        self.p2.place_piece((1,2))
-        assert self.med.game_status() == 'x turn'
-        self.p1.place_piece((0,2))
+        with valid_game(self.med, self.p1, self.p2):
+            with pytest.raises(Exception):
+                self.p2.place_piece((0,0))
 
     def test_play_valid_game_with_many_invalid_moves(self):
-        assert self.med.game_status() == 'x turn'
-        self.p1.place_piece((0,0))
-        assert self.med.game_status() == 'o turn'
-        with pytest.raises(Exception):
-            self.p2.place_piece((0,0))
-            assert self.med.game_status() == 'o turn'
-            self.p2.place_piece((0,0))
-            assert self.med.game_status() == 'o turn'
-            self.p2.place_piece((0,0))
-        assert self.med.game_status() == 'o turn'
-        self.p2.place_piece((1,0))
-        assert self.med.game_status() == 'x turn'
-        self.p1.place_piece((0,1))
-        assert self.med.game_status() == 'o turn'
-        self.p2.place_piece((1,2))
-        assert self.med.game_status() == 'x turn'
-        self.p1.place_piece((0,2))
-        assert self.med.game_status() == 'x won'
-        assert self.med.game_status() == 'x won'
+        with valid_game(self.med, self.p1, self.p2):
+            with pytest.raises(Exception):
+                self.p2.place_piece((0,0))
+                assert self.med.game_status() == 'o turn'
+                self.p2.place_piece((0,0))
+                assert self.med.game_status() == 'o turn'
+                self.p2.place_piece((0,0))
+
+@contextlib.contextmanager
+def valid_game(med, p1, p2):
+    assert med.game_status() == 'x turn'
+    p1.place_piece((0,0))
+    yield
+    assert med.game_status() == 'o turn'
+    p2.place_piece((1,0))
+    assert med.game_status() == 'x turn'
+    p1.place_piece((0,1))
+    assert med.game_status() == 'o turn'
+    p2.place_piece((1,2))
+    assert med.game_status() == 'x turn'
+    p1.place_piece((0,2))
+    assert med.game_status() == 'x won'
