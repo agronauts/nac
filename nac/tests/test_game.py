@@ -3,7 +3,7 @@ import pytest
 import contextlib
 
 from ..board import Board, Tile, TileNotEmptyError
-from ..players import AIPlayer, Player, Mediator
+from ..players import HumanPlayer, AIPlayer, Player, Mediator
 
 
 class TestBoard:
@@ -76,13 +76,31 @@ def test_player_places_piece(monkeypatch):
 
     player.place_piece((0,0))
 
+class MockMediator(Mediator):
+    def __init__(self):
+        pass
+    def place_piece(self, *args):
+        print(*args)
+        self.captured_args = args
+
+def test_human_player_makes_move(monkeypatch):
+    import sys
+    def mockwrite(prompt):
+        return '1'
+    player = HumanPlayer('x')
+    mockmediator = MockMediator()
+    monkeypatch.setattr(player, '_med', mockmediator)
+    old_input = __builtins__['input']
+    __builtins__['input'] = mockwrite
+
+    player.make_move()
+
+    __builtins__['input'] = old_input
+    captured_token, captured_coord = mockmediator.captured_args
+    assert captured_token == 'x'
+    assert captured_coord == (0, 0)
+
 def test_ai_player_makes_random_move(monkeypatch):
-    class MockMediator(Mediator):
-        def __init__(self):
-            pass
-        def place_piece(self, *args):
-            print(*args)
-            self.captured_args = args
     aiplayer = AIPlayer('x')
     mockmediator = MockMediator()
     monkeypatch.setattr(aiplayer, '_med', mockmediator)

@@ -1,5 +1,6 @@
 from board import Tile, TileNotEmptyError
 from collections import Counter
+from math import floor
 
 import copy 
 import itertools as it
@@ -27,6 +28,12 @@ class AIPlayer(Player):
 
     def make_move(self):
         self.place_piece((random.randint(0,2), random.randint(0,2)))
+
+class HumanPlayer(Player):
+    def make_move(self):
+        recv = int(input('Where do you want to put a piece [1-9]')) -1
+        x, y = recv // 3, recv % 3
+        self.place_piece((x, y))
 
 
 class Mediator:
