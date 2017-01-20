@@ -1,4 +1,4 @@
-from .board import Tile, TileNotEmptyError
+from board import Tile, TileNotEmptyError
 from collections import Counter
 
 import copy 

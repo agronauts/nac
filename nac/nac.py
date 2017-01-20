@@ -1,8 +1,28 @@
-from .board import Board, Tile, TileNotEmptyError
-from .players import Player, Mediator
+from board import Board, Tile, TileNotEmptyError
+from players import AIPlayer, Mediator
+from time import sleep
 
 def main():
-    pass
+    print('Starting game')
+    board = Board()
+    p1 = AIPlayer('x')
+    p2 = AIPlayer('o')
+    med = Mediator(board, p1, p2)
+    count = 0
+    while 'won' not in med.game_status() and count < 100:
+        count += 1
+        print(board)
+        print('\n')
+        try:
+            if med.game_status() == 'x turn':
+                p1.make_move()
+            elif med.game_status() == 'o turn':
+                p2.make_move()
+        except TileNotEmptyError:
+            pass
+        sleep(.4)
+    print(board)
+    print(med.game_status())
 
 if __name__ == '__main__':
     main()
